@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Escolar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f9ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #00a6b8;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #dceeff;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0057b8;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 1rem 2rem;
+      display: none; 
+    }
+
+    section.active {
+      display: block; 
+    }
+
+    h2 {
+      color: #003366;
+      border-bottom: 2px solid #0057b8;
+      padding-bottom: 0.3rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .submenu {
+      list-style: none;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .submenu li {
+      padding: 0.2rem 0;
+      color: #333;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #0057b8;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Portal Escolar Institucional</h1>
+  </header>
+
+  <nav>
+    <a onclick="showSection('estudiantes')">Estudiantes</a>
+    <a onclick="showSection('padres')">Padres</a>
+    <a onclick="showSection('noticias')">Noticias</a>
+    <a onclick="showSection('extras')">Extras</a>
+  </nav>
+
+  <!-- Estudiantes -->
+  <section id="estudiantes">
+    <h2>Portal para Estudiantes</h2>
+    <div class="card" onclick="toggleMenu('tareas')">
+      Acceso a tareas y actividades por cursos
+      <ul id="tareas" class="submenu">
+        <li>Matemáticas</li>
+        <li>Ciencias</li>
+        <li>Lenguaje</li>
+        <li>Informática</li>
+        <li>Religión</li>
+        <li>Ética</li>
+        <li>Comportamiento</li>
+        <li>Educación Física</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('calendario')">
+      Calendario con exámenes y eventos
+      <ul id="calendario" class="submenu">
+        <li>Exámenes trimestrales</li>
+        <li>Eventos culturales</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('descargas')">
+      Descargas de guías y libros digitales
+      <ul id="descargas" class="submenu">
+        <li>Guías por curso</li>
+        <li>Libros recomendados</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('notas')">
+      Subir trabajos o ver notas
+      <ul id="notas" class="submenu">
+        <li>Subir tarea</li>
+        <li>Ver calificaciones</li>
+      </ul>
+    </div>
+  </section>
+
+ 
+  <section id="padres">
+    <h2>Portal para Padres</h2>
+    <div class="card" onclick="toggleMenu('comportamiento')">
+      Evidencia del comportamiento de su hijo
+      <ul id="comportamiento" class="submenu">
+        <li>Reportes diarios</li>
+        <li>Recomendaciones docentes</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('avisos')">
+      Avisos importantes (eventos escolares)
+      <ul id="avisos" class="submenu">
+        <li>Reuniones generales</li>
+        <li>Actividades extracurriculares</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('pagos')">
+      Pagos de matrícula o pensión en línea
+      <ul id="pagos" class="submenu">
+        <li>Estado de cuenta</li>
+        <li>Realizar pago</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('citas')">
+      Citas con docentes
+      <ul id="citas" class="submenu">
+        <li>Solicitar cita</li>
+        <li>Historial de reuniones</li>
+      </ul>
+    </div>
+  </section>
+
+ 
+  <section id="noticias">
+    <h2>Portal de Noticias del Colegio</h2>
+    <div class="card" onclick="toggleMenu('logros')">
+      Publicación de logros, ferias y celebraciones
+      <ul id="logros" class="submenu">
+        <li>Ferias científicas</li>
+        <li>Premios estudiantiles</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('fotos')">
+      Fotos o videos de eventos escolares
+      <ul id="fotos" class="submenu">
+        <li>Galería de imágenes</li>
+        <li>Videos recientes</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('boletin')">
+      Boletín mensual del colegio
+      <ul id="boletin" class="submenu">
+        <li>Último boletín</li>
+        <li>Ediciones anteriores</li>
+      </ul>
+    </div>
+  </section>
+
+ 
+  <section id="extras">
+    <h2>Extras Útiles</h2>
+    <div class="card" onclick="toggleMenu('muro')">
+      Muro estudiantil con destacados por curso
+      <ul id="muro" class="submenu">
+        <li>Estudiantes destacados</li>
+        <li>Reconocimientos del mes</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('rincon')">
+      Rincón ecológico o cultural
+      <ul id="rincon" class="submenu">
+        <li>Actividades ecológicas</li>
+        <li>Tradiciones y cultura</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('ranking')">
+      Ranking de rendimiento académico
+      <ul id="ranking" class="submenu">
+        <li>Top 10 general</li>
+        <li>Top por curso</li>
+      </ul>
+    </div>
+    <div class="card" onclick="toggleMenu('blog')">
+      Blog de orientación estudiantil y vocacional
+      <ul id="blog" class="submenu">
+        <li>Consejos vocacionales</li>
+        <li>Artículos de apoyo emocional</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Portal Escolar - Todos los derechos reservados
+  </footer>
+
+  <script>
+    function toggleMenu(id) {
+      const menu = document.getElementById(id);
+      const isVisible = menu.style.display === "block";
+      menu.style.display = isVisible ? "none" : "block";
+    }
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll("section");
+      sections.forEach((sec) => sec.classList.remove("active"));
+      const selected = document.getElementById(sectionId);
+      if (selected) selected.classList.add("active");
+    }
+
+    
+  </script>
+</body>
+
+</html>
