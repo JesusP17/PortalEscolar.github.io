@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portal Escolar</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #f4f9ff;
@@ -24,9 +27,9 @@
       background-color: #dceeff;
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      padding: 0.5rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.5rem;
     }
 
     nav a {
@@ -34,15 +37,23 @@
       color: #0057b8;
       font-weight: bold;
       cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      background-color: #eaf4ff;
+      transition: background-color 0.2s;
+    }
+
+    nav a:hover {
+      background-color: #c9e6ff;
     }
 
     section {
       padding: 1rem 2rem;
-      display: none; 
+      display: none;
     }
 
     section.active {
-      display: block; 
+      display: block;
     }
 
     h2 {
@@ -79,6 +90,36 @@
       color: white;
       margin-top: 2rem;
     }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        width: 90%;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      .card {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
+    }
   </style>
 </head>
 
@@ -89,84 +130,52 @@
 
   <nav>
     <a onclick="showSection('estudiantes')">Estudiantes</a>
-    <a onclick="showSection('padres')">Padres</a>
     <a onclick="showSection('noticias')">Noticias</a>
     <a onclick="showSection('extras')">Extras</a>
   </nav>
 
-  <!-- Estudiantes -->
   <section id="estudiantes">
     <h2>Portal para Estudiantes</h2>
-    <div class="card" onclick="toggleMenu('tareas')">
-      Acceso a tareas y actividades por cursos
-      <ul id="tareas" class="submenu">
-        <li>Matemáticas</li>
-        <li>Ciencias</li>
-        <li>Lenguaje</li>
-        <li>Informática</li>
-        <li>Religión</li>
-        <li>Ética</li>
-        <li>Comportamiento</li>
-        <li>Educación Física</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('calendario')">
-      Calendario con exámenes y eventos
-      <ul id="calendario" class="submenu">
-        <li>Exámenes trimestrales</li>
-        <li>Eventos culturales</li>
-      </ul>
-    </div>
+
     <div class="card" onclick="toggleMenu('descargas')">
-      Descargas de guías y libros digitales
-      <ul id="descargas" class="submenu">
-        <li>Guías por curso</li>
-        <li>Libros recomendados</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('notas')">
-      Subir trabajos o ver notas
-      <ul id="notas" class="submenu">
-        <li>Subir tarea</li>
-        <li>Ver calificaciones</li>
-      </ul>
-    </div>
-  </section>
+    libros digitales recomendados
+    <ul id="descargas" class="submenu">
+      <li><a href="https://bibliotecadigital.ilce.edu.mx/Colecciones/ObrasClasicas/_docs/ElPrincipito.pdf" target="_blank">📗 El Principito</a></li>
+      <li><a href="https://www.secst.cl/upfiles/documentos/19072016_1207am_578dc39115fe9.pdf" target="_blank">📘 Cien años de soledad</a></li>
+      <li><a href="https://scispace.com/pdf/memoria-de-mis-putas-tristes-2xw1csop1t.pdf" target="_blank">📘 Memoria de mis P. tristes. (Gabriel García Márquez).</a></li>
+      <li><a href="https://web.seducoahuila.gob.mx/biblioweb/upload/ILIADA.pdf" target="_blank">📘 La Iliada.</a></li>
+      <li><a href="https://www.leadersummaries.com/es/libros/resumen/detalle/el-poder-de-los-habitos" target="_blank">📘 El poder de los habitos</a></li>
+    </ul>
+  </div>
+    <div class="card" onclick="toggleMenu('recursos')">
+  Recursos y técnicas para todos los cursos
+</div>
+<ul id="recursos" class="submenu">
+  <li><strong onclick="toggleMenu('tecnicas')"> Técnicas de estudio</strong>
+    <ul id="tecnicas" class="submenu">
+      <li><a href="https://www.educapeques.com/escuela-de-padres/tecnicas-de-estudio-para-ninos.html" target="_blank">Técnicas para niños - Educapeques</a></li>
+      <li><a href="https://psicologiaymente.com/clinica/tecnicas-de-estudio" target="_blank">Psicología y mente - Técnicas útiles</a></li>
+    </ul>
+  </li>
 
- 
-  <section id="padres">
-    <h2>Portal para Padres</h2>
-    <div class="card" onclick="toggleMenu('comportamiento')">
-      Evidencia del comportamiento de su hijo
-      <ul id="comportamiento" class="submenu">
-        <li>Reportes diarios</li>
-        <li>Recomendaciones docentes</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('avisos')">
-      Avisos importantes (eventos escolares)
-      <ul id="avisos" class="submenu">
-        <li>Reuniones generales</li>
-        <li>Actividades extracurriculares</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('pagos')">
-      Pagos de matrícula o pensión en línea
-      <ul id="pagos" class="submenu">
-        <li>Estado de cuenta</li>
-        <li>Realizar pago</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('citas')">
-      Citas con docentes
-      <ul id="citas" class="submenu">
-        <li>Solicitar cita</li>
-        <li>Historial de reuniones</li>
-      </ul>
-    </div>
-  </section>
 
- 
+  <li><strong onclick="toggleMenu('manual')"> Manual de convivencia</strong>
+    <ul id="manual" class="submenu">
+      <li><a href="https://manizales.gov.co/RecursosAlcaldia/201703272058219470.pdf" target="_blank"> Ver manual de convivencia</a></li>
+    </ul>
+  </li>
+
+  <li><strong onclick="toggleMenu('fuentes')"> Recursos confiables</strong>
+    <ul id="fuentes" class="submenu">
+      <li><a href="https://es.khanacademy.org" target="_blank"> Khan Academy</a></li>
+      <li><a href="https://es.wikipedia.org/wiki/Wikipedia:Enciclopedia_para_estudiantes" target="_blank"> Wikipedia Escolar</a></li>
+      <li><a href="https://www.wdl.org/es/" target="_blank"> Biblioteca Digital Mundial</a></li>
+      <li><a href="https://www.cervantesvirtual.com" target="_white"> Biblioteca Miguel de Cervantes</a></li>
+    </ul>
+  </li>
+</ul>
+</section>
+  
   <section id="noticias">
     <h2>Portal de Noticias del Colegio</h2>
     <div class="card" onclick="toggleMenu('logros')">
@@ -179,20 +188,22 @@
     <div class="card" onclick="toggleMenu('fotos')">
       Fotos o videos de eventos escolares
       <ul id="fotos" class="submenu">
-        <li>Galería de imágenes</li>
-        <li>Videos recientes</li>
-      </ul>
+  <li>
+    <a href="https://www.facebook.com/oirntadoratencharo/photos?locale=es_LA" target="_blank">
+      Galería IETECI (Facebook)
+    </a>
+  </li>
+  <li>
+    <a href="https://www.facebook.com/oirntadoratencharo/videos?locale=es_LA" target="_blank">
+      Videos IETECI (Facebook)
+    </a>
+  </li>
+</ul>
+
     </div>
-    <div class="card" onclick="toggleMenu('boletin')">
-      Boletín mensual del colegio
-      <ul id="boletin" class="submenu">
-        <li>Último boletín</li>
-        <li>Ediciones anteriores</li>
-      </ul>
-    </div>
+    
   </section>
 
- 
   <section id="extras">
     <h2>Extras Útiles</h2>
     <div class="card" onclick="toggleMenu('muro')">
@@ -216,13 +227,16 @@
         <li>Top por curso</li>
       </ul>
     </div>
-    <div class="card" onclick="toggleMenu('blog')">
-      Blog de orientación estudiantil y vocacional
-      <ul id="blog" class="submenu">
-        <li>Consejos vocacionales</li>
-        <li>Artículos de apoyo emocional</li>
-      </ul>
-    </div>
+    <div class="card" onclick="toggleMenu('vocacional')">
+  Consejos vocacionales
+  <ul id="vocacional" class="submenu">
+    <li>
+      <a href="https://www.learnchile.cl/consejos-vocacionales/" target="_blank">
+        ¿Cómo decidir qué estudiar?
+      </a>
+    </li>
+  </ul>
+</div>
   </section>
 
   <footer>
@@ -243,8 +257,9 @@
       if (selected) selected.classList.add("active");
     }
 
-    
+    window.onload = function () {
+      showSection("estudiantes");
+    };
   </script>
 </body>
-
 </html>
