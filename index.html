@@ -173,7 +173,7 @@
 
     @keyframes slideDown {
       from { opacity: 0; max-height: 0; }
-      to { opacity: 1; max-height: 500px; }
+      to { opacity: 1; max-height: 1000px; }
     }
 
     .submenu li {
@@ -263,6 +263,19 @@
       font-size: 1.2rem;
     }
 
+    /* Estilos para submenús anidados */
+    .nested-submenu {
+      padding-left: 1rem;
+      display: none;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+      margin-top: 0.5rem;
+    }
+
+    .nested-submenu.show {
+      display: block;
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2rem;
@@ -305,7 +318,7 @@
       <a onclick="showSection('extras')">⭐ Extras</a>
     </nav>
 
-    <section id="estudiantes">
+    <section id="estudiantes" class="active">
       <h2>Portal para Estudiantes</h2>
 
       <div class="card" onclick="toggleMenu('descargas')">
@@ -324,52 +337,124 @@
         <h3>🎯 Recursos y Técnicas para Todos los Cursos</h3>
         <p>Herramientas esenciales para potenciar tu aprendizaje</p>
         <ul id="recursos" class="submenu">
-          <li><strong onclick="toggleMenu('tecnicas')">🧠 Técnicas de estudio</strong>
-            <ul id="tecnicas" class="submenu">
+          <li>
+            <strong onclick="event.stopPropagation(); toggleMenu('tecnicas')">🧠 Técnicas de estudio</strong>
+            <ul id="tecnicas" class="nested-submenu">
               <li><a href="https://www.educapeques.com/escuela-de-padres/tecnicas-de-estudio-para-ninos.html" target="_blank">Técnicas para niños - Educapeques</a></li>
               <li><a href="https://psicologiaymente.com/clinica/tecnicas-de-estudio" target="_blank">Psicología y mente - Técnicas útiles</a></li>
             </ul>
           </li>
-          <li><strong onclick="toggleMenu('manual')">📋 Manual de convivencia</strong>
-            <ul id="manual" class="submenu">
+          <li>
+            <strong onclick="event.stopPropagation(); toggleMenu('manual')">📋 Manual de convivencia</strong>
+            <ul id="manual" class="nested-submenu">
               <li><a href="https://manizales.gov.co/RecursosAlcaldia/201703272058219470.pdf" target="_blank">Ver manual de convivencia</a></li>
             </ul>
           </li>
-          <li><strong onclick="toggleMenu('fuentes')">🔍 Recursos confiables</strong>
-            <ul id="fuentes" class="submenu">
+          <li>
+            <strong onclick="event.stopPropagation(); toggleMenu('fuentes')">🔍 Recursos confiables</strong>
+            <ul id="fuentes" class="nested-submenu">
               <li><a href="https://es.khanacademy.org" target="_blank">Khan Academy</a></li>
-              <li><a href="https://es.wikipedia.org/wiki/Wikipedia:Enciclopedia_para_estudiantes" target="_blank">Wikipedia Escolar</a></li>
+              <li><a href="https://es.wikipedia.org/wiki/Wikipedia:Portada" target="_blank">Wikipedia Escolar</a></li>
               <li><a href="https://www.wdl.org/es/" target="_blank">Biblioteca Digital Mundial</a></li>
               <li><a href="https://www.cervantesvirtual.com" target="_blank">Biblioteca Miguel de Cervantes</a></li>
             </ul>
           </li>
         </ul>
       </div>
-
       <div class="card" onclick="toggleMenu('horarios')">
         <h3>⏰ Horarios y Cronogramas</h3>
         <p>Mantente al día con todos los horarios académicos</p>
-        <ul id="horarios" class="submenu">
-          <li><a href="#"><span class="icon">📅</span>Horario de clases por curso</a></li>
-          <li><a href="#"><span class="icon">🕒</span>Cronograma de pre-icfes</a></li>
-          <li><a href="#"><span class="icon">📋</span>Calendario académico</a></li>
-          <li><a href="#"><span class="icon">⏱️</span>Horarios de recreo y descansos</a></li>
+        <ul id="horarios" class="submenu"><li>
+  <strong onclick="event.stopPropagation(); toggleMenu('horarioClases')">
+    <span class="icon">📅</span>Horario de clases por curso
+  </strong>
+  <ul id="horarioClases" class="nested-submenu">
+    <li>
+      <div class="event-card" style="background:white; color:#333; padding:20px; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
+        <h4 style="color:#2a5298; margin-bottom:15px;">🕒 Horario General</h4>
+        <table style="width:100%; border-collapse: collapse; text-align:center; background:white; color:#333; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+          <thead style="background:linear-gradient(135deg, #667eea, #764ba2); color:white;">
+            <tr>
+              <th style="padding:10px;">Hora</th>
+              <th style="padding:10px;">Actividad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>6:25 AM</td><td>Entrada</td></tr>
+            <tr><td>6:30 - 7:20</td><td>Primera hora</td></tr>
+            <tr><td>7:20 - 8:10</td><td>Segunda hora</td></tr>
+            <tr><td>8:10 - 9:00</td><td>Tercera hora</td></tr>
+            <tr><td>9:00 - 9:50</td><td>Cuarta hora</td></tr>
+            <tr style="background:#f0f0f0;"><td>9:50 - 10:10</td><td>Descanso</td></tr>
+            <tr><td>10:10 - 11:00</td><td>Quinta hora</td></tr>
+            <tr><td>11:10 - 12:00</td><td>Sexta hora</td></tr>
+            <tr style="background:#e6ffe6;"><td>12:00</td><td>Salida</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+</li>   
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">🕒</span>Cronograma de evaluaciones</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">📋</span>Calendario académico</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">⏱️</span>Horarios de recreo y descansos</a></li>
         </ul>
       </div>
 
       <div class="card" onclick="toggleMenu('tareas')">
-        <h3>✍️ Centro de Eventos</h3>
+        <h3>✍️ Centro de Tareas y Proyectos</h3>
         <p>Gestiona y consulta todas tus actividades académicas</p>
         <ul id="tareas" class="submenu">
-          <li><a href="#"><span class="icon">📝</span>Expociencia</a></li>
-          <li><a href="#"><span class="icon">📊</span>Feria de Emprendimiento</a></li>
-          <li><a href="#"><span class="icon">📤</span>Bailes</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">📝</span>Tareas pendientes por materia</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">📊</span>Proyectos en curso</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">📤</span>Portal de entrega de trabajos</a></li>
+          <li><a href="#" onclick="event.preventDefault()"><span class="icon">📈</span>Seguimiento de calificaciones</a></li>
         </ul>
       </div>
     </section>
   
     <section id="noticias">
       <h2>Portal de Noticias del Colegio</h2>
+
+      <div class="card" onclick="toggleMenu('ferias')">
+        <h3>🎪 Ferias Escolares</h3>
+        <p>Conoce todas las ferias y eventos académicos del año</p>
+        <ul id="ferias" class="submenu">
+          <li>
+            <div class="event-card">
+              <div class="event-date">📅 15-17 de Marzo, 2025</div>
+              <h4>🔬 Feria de Ciencias</h4>
+              <p>Muestra de proyectos científicos de todos los cursos</p>
+              <div class="image-placeholder">Foto: Proyectos científicos estudiantiles</div>
+            </div>
+          </li>
+          <li>
+            <div class="event-card">
+              <div class="event-date">📅 20-22 de Abril, 2025</div>
+              <h4>📚 Feria del Libro</h4>
+              <p>Celebración de la lectura y presentación de autores locales</p>
+              <div class="image-placeholder">Foto: Stand de libros y presentaciones</div>
+            </div>
+          </li>
+          <li>
+            <div class="event-card">
+              <div class="event-date">📅 10-12 de Mayo, 2025</div>
+              <h4>🎨 Feria Cultural</h4>
+              <p>Expresión artística y cultural de nuestra comunidad estudiantil</p>
+              <div class="image-placeholder">Foto: Presentaciones artísticas</div>
+            </div>
+          </li>
+          <li>
+            <div class="event-card">
+              <div class="event-date">📅 15-17 de Junio, 2025</div>
+              <h4>💻 Feria Tecnológica</h4>
+              <p>Innovación y tecnología desarrollada por estudiantes</p>
+              <div class="image-placeholder">Foto: Proyectos tecnológicos</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
       <div class="card" onclick="toggleMenu('recreacion')">
         <h3>⚽ Recreación Futbolística</h3>
         <p>Sigue todos los partidos y competencias deportivas</p>
@@ -430,10 +515,13 @@
         <p>Momentos destacados de nuestra vida escolar</p>
         <ul id="galeria" class="submenu">
           <li>
-            <div class="image-placeholder">Graduación 2024 - Promoción "X"</div>
+            <div class="image-placeholder">Graduación 2024 - Promoción "Esperanza"</div>
           </li>
           <li>
             <div class="image-placeholder">Día del Estudiante - Actividades recreativas</div>
+          </li>
+          <li>
+            <div class="image-placeholder">Semana Cultural - Presentaciones artísticas</div>
           </li>
           <li>
             <div class="image-placeholder">Olimpiadas Deportivas - Competencias</div>
@@ -500,15 +588,26 @@
   <script>
     function toggleMenu(id) {
       const menu = document.getElementById(id);
+      if (!menu) return;
+      
       const isVisible = menu.classList.contains('show');
       
-      // Cerrar todos los menús
-      document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
-      
-      // Mostrar el menú clickeado si no estaba visible
-      if (!isVisible) {
-        menu.classList.add('show');
+      // Si es un submenú anidado, solo alternamos su visibilidad
+      if (menu.classList.contains('nested-submenu')) {
+        menu.classList.toggle('show');
+        return;
       }
+      
+      // Para menús principales, cerrar todos los otros menús del mismo nivel
+      const allMenus = document.querySelectorAll('.submenu:not(.nested-submenu)');
+      allMenus.forEach(m => {
+        if (m !== menu) {
+          m.classList.remove('show');
+        }
+      });
+      
+      // Alternar el menú clickeado
+      menu.classList.toggle('show');
     }
 
     function showSection(sectionId) {
@@ -521,17 +620,23 @@
       document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
     }
 
+    // Función para prevenir que los clicks en enlaces internos causen errores
+    document.addEventListener('DOMContentLoaded', function() {
+      // Agregar event listeners a todos los enlaces internos
+      const internalLinks = document.querySelectorAll('a[href="#"]');
+      internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Aquí podrías agregar funcionalidad específica para cada enlace interno
+        });
+      });
+    });
+
     window.onload = function () {
       showSection("estudiantes");
     };
-
-    // Cerrar menús al hacer click fuera
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.card')) {
-        document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
-      }
-    });
   </script>
 </body>
 </html>
+
 
