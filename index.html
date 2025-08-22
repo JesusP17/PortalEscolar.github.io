@@ -7,93 +7,265 @@
   <style>
     * {
       box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f9ff;
       margin: 0;
       padding: 0;
     }
 
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      min-height: 100vh;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+    }
+
     header {
-      background-color: #00a6b8;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
-      padding: 1rem;
+      padding: 2rem 1rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     nav {
-      background-color: #dceeff;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 0.5rem;
+      gap: 1rem;
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     nav a {
       text-decoration: none;
-      color: #0057b8;
-      font-weight: bold;
+      color: #2a5298;
+      font-weight: 600;
       cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      background-color: #eaf4ff;
-      transition: background-color 0.2s;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
     }
 
     nav a:hover {
-      background-color: #c9e6ff;
+      background: #2a5298;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(42, 82, 152, 0.3);
     }
 
     section {
-      padding: 1rem 2rem;
+      padding: 2rem;
       display: none;
+      animation: fadeIn 0.5s ease-in;
     }
 
     section.active {
       display: block;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     h2 {
-      color: #003366;
-      border-bottom: 2px solid #0057b8;
-      padding-bottom: 0.3rem;
+      color: #2a5298;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+      font-weight: 300;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 2px;
     }
 
     .card {
       background: white;
-      border-radius: 10px;
-      padding: 1rem;
-      margin: 1rem 0;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
       cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h3 {
+      color: #2a5298;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .submenu {
       list-style: none;
-      padding-left: 1rem;
-      margin-top: 0.5rem;
+      padding: 1rem 0 0 1rem;
+      margin-top: 1rem;
       display: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .submenu.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 500px; }
     }
 
     .submenu li {
-      padding: 0.2rem 0;
-      color: #333;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .submenu li:hover {
+      padding-left: 1rem;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 10px;
+    }
+
+    .submenu a {
+      color: #555;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .submenu a:hover {
+      color: #2a5298;
+    }
+
+    .submenu strong {
+      color: #2a5298;
+      cursor: pointer;
+      display: block;
+      padding: 0.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-style: italic;
+      margin: 1rem 0;
+      border: 2px dashed #ccc;
+    }
+
+    .event-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .event-date {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .match-card {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 10px 30px rgba(17, 153, 142, 0.3);
     }
 
     footer {
       text-align: center;
-      padding: 1rem;
-      background-color: #0057b8;
+      padding: 2rem;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
       color: white;
       margin-top: 2rem;
     }
 
-    @media (max-width: 600px) {
+    .icon {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
       header h1 {
-        font-size: 1.2rem;
+        font-size: 2rem;
       }
 
       nav {
@@ -104,7 +276,6 @@
       nav a {
         width: 90%;
         text-align: center;
-        font-size: 1rem;
       }
 
       section {
@@ -112,142 +283,232 @@
       }
 
       .card {
-        font-size: 0.95rem;
-        padding: 0.8rem;
+        padding: 1rem;
       }
 
       h2 {
-        font-size: 1.1rem;
+        font-size: 1.5rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <h1>Portal Escolar Institucional</h1>
-  </header>
+  <div class="container">
+    <header>
+      <h1>🎓 Portal Escolar Institucional</h1>
+    </header>
 
-  <nav>
-    <a onclick="showSection('estudiantes')">Estudiantes</a>
-    <a onclick="showSection('noticias')">Noticias</a>
-    <a onclick="showSection('extras')">Extras</a>
-  </nav>
+    <nav>
+      <a onclick="showSection('estudiantes')">👨‍🎓 Estudiantes</a>
+      <a onclick="showSection('noticias')">📰 Noticias</a>
+      <a onclick="showSection('extras')">⭐ Extras</a>
+    </nav>
 
-  <section id="estudiantes">
-    <h2>Portal para Estudiantes</h2>
+    <section id="estudiantes">
+      <h2>Portal para Estudiantes</h2>
 
-    <div class="card" onclick="toggleMenu('descargas')">
-    libros digitales recomendados
-    <ul id="descargas" class="submenu">
-      <li><a href="https://bibliotecadigital.ilce.edu.mx/Colecciones/ObrasClasicas/_docs/ElPrincipito.pdf" target="_blank">📗 El Principito</a></li>
-      <li><a href="https://www.secst.cl/upfiles/documentos/19072016_1207am_578dc39115fe9.pdf" target="_blank">📘 Cien años de soledad</a></li>
-      <li><a href="https://scispace.com/pdf/memoria-de-mis-putas-tristes-2xw1csop1t.pdf" target="_blank">📘 Memoria de mis P. tristes. (Gabriel García Márquez).</a></li>
-      <li><a href="https://web.seducoahuila.gob.mx/biblioweb/upload/ILIADA.pdf" target="_blank">📘 La Iliada.</a></li>
-      <li><a href="https://www.leadersummaries.com/es/libros/resumen/detalle/el-poder-de-los-habitos" target="_blank">📘 El poder de los habitos</a></li>
-    </ul>
-  </div>
-    <div class="card" onclick="toggleMenu('recursos')">
-  Recursos y técnicas para todos los cursos
-</div>
-<ul id="recursos" class="submenu">
-  <li><strong onclick="toggleMenu('tecnicas')"> Técnicas de estudio</strong>
-    <ul id="tecnicas" class="submenu">
-      <li><a href="https://www.educapeques.com/escuela-de-padres/tecnicas-de-estudio-para-ninos.html" target="_blank">Técnicas para niños - Educapeques</a></li>
-      <li><a href="https://psicologiaymente.com/clinica/tecnicas-de-estudio" target="_blank">Psicología y mente - Técnicas útiles</a></li>
-    </ul>
-  </li>
+      <div class="card" onclick="toggleMenu('descargas')">
+        <h3>📚 Libros Digitales Recomendados</h3>
+        <p>Explora nuestra colección de literatura clásica y contemporánea</p>
+        <ul id="descargas" class="submenu">
+          <li><a href="https://bibliotecadigital.ilce.edu.mx/Colecciones/ObrasClasicas/_docs/ElPrincipito.pdf" target="_blank"><span class="icon">📗</span>El Principito</a></li>
+          <li><a href="https://www.secst.cl/upfiles/documentos/19072016_1207am_578dc39115fe9.pdf" target="_blank"><span class="icon">📘</span>Cien años de soledad</a></li>
+          <li><a href="https://scispace.com/pdf/memoria-de-mis-putas-tristes-2xw1csop1t.pdf" target="_blank"><span class="icon">📘</span>Memoria de mis P. tristes (Gabriel García Márquez)</a></li>
+          <li><a href="https://web.seducoahuila.gob.mx/biblioweb/upload/ILIADA.pdf" target="_blank"><span class="icon">📘</span>La Iliada</a></li>
+          <li><a href="https://www.leadersummaries.com/es/libros/resumen/detalle/el-poder-de-los-habitos" target="_blank"><span class="icon">📘</span>El poder de los hábitos</a></li>
+        </ul>
+      </div>
 
+      <div class="card" onclick="toggleMenu('recursos')">
+        <h3>🎯 Recursos y Técnicas para Todos los Cursos</h3>
+        <p>Herramientas esenciales para potenciar tu aprendizaje</p>
+        <ul id="recursos" class="submenu">
+          <li><strong onclick="toggleMenu('tecnicas')">🧠 Técnicas de estudio</strong>
+            <ul id="tecnicas" class="submenu">
+              <li><a href="https://www.educapeques.com/escuela-de-padres/tecnicas-de-estudio-para-ninos.html" target="_blank">Técnicas para niños - Educapeques</a></li>
+              <li><a href="https://psicologiaymente.com/clinica/tecnicas-de-estudio" target="_blank">Psicología y mente - Técnicas útiles</a></li>
+            </ul>
+          </li>
+          <li><strong onclick="toggleMenu('manual')">📋 Manual de convivencia</strong>
+            <ul id="manual" class="submenu">
+              <li><a href="https://manizales.gov.co/RecursosAlcaldia/201703272058219470.pdf" target="_blank">Ver manual de convivencia</a></li>
+            </ul>
+          </li>
+          <li><strong onclick="toggleMenu('fuentes')">🔍 Recursos confiables</strong>
+            <ul id="fuentes" class="submenu">
+              <li><a href="https://es.khanacademy.org" target="_blank">Khan Academy</a></li>
+              <li><a href="https://es.wikipedia.org/wiki/Wikipedia:Enciclopedia_para_estudiantes" target="_blank">Wikipedia Escolar</a></li>
+              <li><a href="https://www.wdl.org/es/" target="_blank">Biblioteca Digital Mundial</a></li>
+              <li><a href="https://www.cervantesvirtual.com" target="_blank">Biblioteca Miguel de Cervantes</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
 
-  <li><strong onclick="toggleMenu('manual')"> Manual de convivencia</strong>
-    <ul id="manual" class="submenu">
-      <li><a href="https://manizales.gov.co/RecursosAlcaldia/201703272058219470.pdf" target="_blank"> Ver manual de convivencia</a></li>
-    </ul>
-  </li>
+      <div class="card" onclick="toggleMenu('horarios')">
+        <h3>⏰ Horarios y Cronogramas</h3>
+        <p>Mantente al día con todos los horarios académicos</p>
+        <ul id="horarios" class="submenu">
+          <li><a href="#"><span class="icon">📅</span>Horario de clases por curso</a></li>
+          <li><a href="#"><span class="icon">🕒</span>Cronograma de pre-icfes</a></li>
+          <li><a href="#"><span class="icon">📋</span>Calendario académico</a></li>
+          <li><a href="#"><span class="icon">⏱️</span>Horarios de recreo y descansos</a></li>
+        </ul>
+      </div>
 
-  <li><strong onclick="toggleMenu('fuentes')"> Recursos confiables</strong>
-    <ul id="fuentes" class="submenu">
-      <li><a href="https://es.khanacademy.org" target="_blank"> Khan Academy</a></li>
-      <li><a href="https://es.wikipedia.org/wiki/Wikipedia:Enciclopedia_para_estudiantes" target="_blank"> Wikipedia Escolar</a></li>
-      <li><a href="https://www.wdl.org/es/" target="_blank"> Biblioteca Digital Mundial</a></li>
-      <li><a href="https://www.cervantesvirtual.com" target="_white"> Biblioteca Miguel de Cervantes</a></li>
-    </ul>
-  </li>
-</ul>
-</section>
+      <div class="card" onclick="toggleMenu('tareas')">
+        <h3>✍️ Centro de Eventos</h3>
+        <p>Gestiona y consulta todas tus actividades académicas</p>
+        <ul id="tareas" class="submenu">
+          <li><a href="#"><span class="icon">📝</span>Expociencia</a></li>
+          <li><a href="#"><span class="icon">📊</span>Feria de Emprendimiento</a></li>
+          <li><a href="#"><span class="icon">📤</span>Bailes</a></li>
+        </ul>
+      </div>
+    </section>
   
-  <section id="noticias">
-    <h2>Portal de Noticias del Colegio</h2>
-    <div class="card" onclick="toggleMenu('logros')">
-      Publicación de logros, ferias y celebraciones
-      <ul id="logros" class="submenu">
-        <li>Ferias científicas</li>
-        <li>Premios estudiantiles</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('fotos')">
-      Fotos o videos de eventos escolares
-      <ul id="fotos" class="submenu">
-  <li>
-    <a href="https://www.facebook.com/oirntadoratencharo/photos?locale=es_LA" target="_blank">
-      Galería IETECI (Facebook)
-    </a>
-  </li>
-  <li>
-    <a href="https://www.facebook.com/oirntadoratencharo/videos?locale=es_LA" target="_blank">
-      Videos IETECI (Facebook)
-    </a>
-  </li>
-</ul>
+    <section id="noticias">
+      <h2>Portal de Noticias del Colegio</h2>
+      <div class="card" onclick="toggleMenu('recreacion')">
+        <h3>⚽ Recreación Futbolística</h3>
+        <p>Sigue todos los partidos y competencias deportivas</p>
+        <ul id="recreacion" class="submenu">
+          <li>
+            <div class="match-card">
+              <h4>🏆 Olimpiadas Intercolegiales</h4>
+              <div class="event-date">📅 Próximo: 28 de Agosto, 2025</div>
+              <p><strong>IETECI vs Colegio San José</strong></p>
+              <p>⏰ Hora: 2:00 PM | 📍 Cancha Principal</p>
+              <div class="image-placeholder">Foto: Equipo IETECI en acción</div>
+            </div>
+          </li>
+          <li>
+            <div class="match-card">
+              <h4>🥇 Torneo Interno</h4>
+              <div class="event-date">📅 En curso - Finales: 5 de Septiembre</div>
+              <p><strong>Semifinales: 11° vs 10° | 9° vs 8°</strong></p>
+              <p>⏰ Hora: 3:30 PM | 📍 Cancha de la institución</p>
+              <div class="image-placeholder">Tabla de posiciones del torneo</div>
+            </div>
+          </li>
+          <li>
+            <div class="match-card">
+              <h4>⚽ Liga Estudiantil Regional</h4>
+              <div class="event-date">📅 Próximo: 12 de Septiembre, 2025</div>
+              <p><strong>IETECI vs Liceo Moderno</strong></p>
+              <p>⏰ Hora: 4:00 PM | 📍 Estadio Municipal</p>
+              <div class="image-placeholder">Foto: Celebración del último gol</div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-    </div>
-    
-  </section>
+      <div class="card" onclick="toggleMenu('logros')">
+        <h3>🏅 Publicación de Logros y Celebraciones</h3>
+        <p>Celebramos los éxitos de nuestra comunidad educativa</p>
+        <ul id="logros" class="submenu">
+          <li>
+            <div class="event-card">
+              <h4>🥇 Primer Lugar en Matemáticas Regionales</h4>
+              <p>Estudiante: María González - Grado 11°</p>
+              <div class="image-placeholder">Foto: María recibiendo su premio</div>
+            </div>
+          </li>
+          <li>
+            <div class="event-card">
+              <h4>🎭 Reconocimiento en Teatro Escolar</h4>
+              <p>Obra: "El Sueño de una Noche de Verano" - Grado 10°</p>
+              <div class="image-placeholder">Foto: Grupo de teatro en escena</div>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-  <section id="extras">
-    <h2>Extras Útiles</h2>
-    <div class="card" onclick="toggleMenu('muro')">
-      Muro estudiantil con destacados por curso
-      <ul id="muro" class="submenu">
-        <li>Estudiantes destacados</li>
-        <li>Reconocimientos del mes</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('rincon')">
-      Rincón ecológico o cultural
-      <ul id="rincon" class="submenu">
-        <li>Actividades ecológicas</li>
-        <li>Tradiciones y cultura</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('ranking')">
-      Ranking de rendimiento académico
-      <ul id="ranking" class="submenu">
-        <li>Top 10 general</li>
-        <li>Top por curso</li>
-      </ul>
-    </div>
-    <div class="card" onclick="toggleMenu('vocacional')">
-  Consejos vocacionales
-  <ul id="vocacional" class="submenu">
-    <li>
-      <a href="https://www.learnchile.cl/consejos-vocacionales/" target="_blank">
-        ¿Cómo decidir qué estudiar?
-      </a>
-    </li>
-  </ul>
-</div>
-  </section>
+      <div class="card" onclick="toggleMenu('galeria')">
+        <h3>📸 Galería de Eventos Escolares</h3>
+        <p>Momentos destacados de nuestra vida escolar</p>
+        <ul id="galeria" class="submenu">
+          <li>
+            <div class="image-placeholder">Graduación 2024 - Promoción "X"</div>
+          </li>
+          <li>
+            <div class="image-placeholder">Día del Estudiante - Actividades recreativas</div>
+          </li>
+          <li>
+            <div class="image-placeholder">Olimpiadas Deportivas - Competencias</div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-  <footer>
-    &copy; 2025 Portal Escolar - Todos los derechos reservados
-  </footer>
+    <section id="extras">
+      <h2>Extras Útiles</h2>
+
+      <div class="card" onclick="toggleMenu('muro')">
+        <h3>🌟 Muro Estudiantil con Destacados por Curso</h3>
+        <ul id="muro" class="submenu">
+          <li>
+            <div class="event-card">
+              <h4>🏆 Estudiantes Destacados del Mes</h4>
+              <div class="image-placeholder">Fotos de estudiantes destacados</div>
+            </div>
+          </li>
+          <li>Reconocimientos académicos</li>
+          <li>Participación en actividades extracurriculares</li>
+        </ul>
+      </div>
+
+      <div class="card" onclick="toggleMenu('rincon')">
+        <h3>🌱 Rincón Ecológico y Cultural</h3>
+        <ul id="rincon" class="submenu">
+          <li>Proyectos de sostenibilidad ambiental</li>
+          <li>Tradiciones y patrimonio cultural</li>
+          <li>Actividades de conciencia ecológica</li>
+        </ul>
+      </div>
+
+      <div class="card" onclick="toggleMenu('ranking')">
+        <h3>📊 Ranking de Rendimiento Académico</h3>
+        <ul id="ranking" class="submenu">
+          <li>Top 10 general institucional</li>
+          <li>Mejores estudiantes por curso</li>
+          <li>Reconocimientos por materia</li>
+        </ul>
+      </div>
+
+      <div class="card" onclick="toggleMenu('vocacional')">
+        <h3>🎯 Consejos Vocacionales</h3>
+        <ul id="vocacional" class="submenu">
+          <li>
+            <a href="https://www.learnchile.cl/consejos-vocacionales/" target="_blank">
+              ¿Cómo decidir qué estudiar?
+            </a>
+          </li>
+          <li>Test de orientación vocacional</li>
+          <li>Información sobre carreras universitarias</li>
+          <li>Becas y oportunidades de estudio</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Portal Escolar Institucional - Educando para el futuro 🚀</p>
+    </footer>
+  </div>
 
   <script>
     function toggleMenu(id) {
       const menu = document.getElementById(id);
-      const isVisible = menu.style.display === "block";
-      menu.style.display = isVisible ? "none" : "block";
+      const isVisible = menu.classList.contains('show');
+      
+      // Cerrar todos los menús
+      document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
+      
+      // Mostrar el menú clickeado si no estaba visible
+      if (!isVisible) {
+        menu.classList.add('show');
+      }
     }
 
     function showSection(sectionId) {
@@ -255,11 +516,22 @@
       sections.forEach((sec) => sec.classList.remove("active"));
       const selected = document.getElementById(sectionId);
       if (selected) selected.classList.add("active");
+      
+      // Cerrar todos los menús al cambiar de sección
+      document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
     }
 
     window.onload = function () {
       showSection("estudiantes");
     };
+
+    // Cerrar menús al hacer click fuera
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.card')) {
+        document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
+      }
+    });
   </script>
 </body>
 </html>
+
