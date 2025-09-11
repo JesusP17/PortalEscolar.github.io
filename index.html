@@ -495,7 +495,7 @@
       </div>
 
       <div class="card" onclick="toggleMenu('logros')">
-        <h3>🏅 Publicación de Logros y Celebraciones</h3>
+        <h3>🏅 Publicación de Logros</h3>
         <p>Celebramos los éxitos de nuestra comunidad educativa</p>
         <ul id="logros" class="submenu">
           <li>
@@ -636,6 +636,23 @@
           <li>Becas y oportunidades de estudio</li>
         </ul>
       </div>
+      
+<div class="card" onclick="toggleMenu('calendario')">
+  <h3>📆 Calendario Escolar</h3>
+  <ul id="calendario" class="submenu">
+    <li>
+      <p>Aquí puedes consultar las fechas importantes y festivos.</p>
+      <iframe 
+        src="https://calendar.google.com/calendar/embed?src=es-us.co%23holiday%40group.v.calendar.google.com&ctz=America%2FBogota" 
+        style="border:0; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        scrolling="no">
+      </iframe>
+    </li>
+  </ul>
+</div>
     </section>
 
     <footer>
@@ -650,13 +667,13 @@
       
       const isVisible = menu.classList.contains('show');
       
-      // Si es un submenú anidado, solo alternamos su visibilidad
+      
       if (menu.classList.contains('nested-submenu')) {
         menu.classList.toggle('show');
         return;
       }
       
-      // Para menús principales, cerrar todos los otros menús del mismo nivel
+      
       const allMenus = document.querySelectorAll('.submenu:not(.nested-submenu)');
       allMenus.forEach(m => {
         if (m !== menu) {
@@ -664,7 +681,7 @@
         }
       });
       
-      // Alternar el menú clickeado
+      
       menu.classList.toggle('show');
     }
 
@@ -674,18 +691,18 @@
       const selected = document.getElementById(sectionId);
       if (selected) selected.classList.add("active");
       
-      // Cerrar todos los menús al cambiar de sección
+      
       document.querySelectorAll('.submenu').forEach(m => m.classList.remove('show'));
     }
 
-    // Función para prevenir que los clicks en enlaces internos causen errores
+   
     document.addEventListener('DOMContentLoaded', function() {
-      // Agregar event listeners a todos los enlaces internos
+     
       const internalLinks = document.querySelectorAll('a[href="#"]');
       internalLinks.forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
-          // Aquí podrías agregar funcionalidad específica para cada enlace interno
+         
         });
       });
     });
