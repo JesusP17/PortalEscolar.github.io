@@ -589,53 +589,91 @@
     </section>
 
     <section id="extras">
-      <h2>Extras Útiles</h2>
 
-      <div class="card" onclick="toggleMenu('muro')">
-        <h3>🌟 Muro Estudiantil con Destacados por Curso</h3>
-        <ul id="muro" class="submenu">
-          <li>
-            <div class="event-card">
-              <h4>🏆 Estudiantes Destacados del Mes</h4>
-              <div class="image-placeholder">Fotos de estudiantes destacados</div>
-            </div>
-          </li>
-          <li>Reconocimientos académicos</li>
-          <li>Participación en actividades extracurriculares</li>
-        </ul>
-      </div>
 
-      <div class="card" onclick="toggleMenu('rincon')">
-        <h3>🌱 Rincón Ecológico y Cultural</h3>
-        <ul id="rincon" class="submenu">
-          <li>Proyectos de sostenibilidad ambiental</li>
-          <li>Tradiciones y patrimonio cultural</li>
-          <li>Actividades de conciencia ecológica</li>
-        </ul>
-      </div>
 
-      <div class="card" onclick="toggleMenu('ranking')">
-        <h3>📊 Ranking de Rendimiento Académico</h3>
-        <ul id="ranking" class="submenu">
-          <li>Top 10 general institucional</li>
-          <li>Mejores estudiantes por curso</li>
-          <li>Reconocimientos por materia</li>
-        </ul>
-      </div>
+      <div class="card" onclick="toggleMenu('ecologico')">
+  <h3>🌱 Rincón Ecológico</h3>
+  <ul id="ecologico" class="submenu">
+    <li>
+      <p>Consejos para cuidar el medio ambiente en nuestro colegio y en casa:</p>
 
-      <div class="card" onclick="toggleMenu('vocacional')">
-        <h3>🎯 Consejos Vocacionales</h3>
-        <ul id="vocacional" class="submenu">
-          <li>
-            <a href="https://www.learnchile.cl/consejos-vocacionales/" target="_blank">
-              ¿Cómo decidir qué estudiar?
-            </a>
-          </li>
-          <li>Test de orientación vocacional</li>
-          <li>Información sobre carreras universitarias</li>
-          <li>Becas y oportunidades de estudio</li>
-        </ul>
-      </div>
+      <ul class="eco-tips">
+        <li>
+          <button class="eco-btn" onclick="toggleEcoSteps('reduce', event)">♻️ <strong>Reduce</strong>: Lleva tu propia botella reutilizable</button>
+          <div id="reduce" class="eco-steps">
+            <p>✅ Pasos para reducir el consumo de botellas plásticas:</p>
+            <ol>
+              <li>Compra una botella reutilizable (metal o plástico libre de BPA).</li>
+              <li>Rellénala en las estaciones de agua del colegio.</li>
+              <li>Límpiala cada día para mantenerla en buen estado.</li>
+            </ol>
+          </div>
+        </li>
+
+        <li>
+          <button class="eco-btn" onclick="toggleEcoSteps('reutiliza', event)">🌿 <strong>Reutiliza</strong>: Usa las hojas por ambos lados</button>
+          <div id="reutiliza" class="eco-steps">
+            <p>✍️ Pasos para reutilizar papel:</p>
+            <ol>
+              <li>Guarda las hojas usadas en una carpeta.</li>
+              <li>Separa las que tengan un lado limpio.</li>
+              <li>Úsalas para borradores o tomar apuntes en clase.</li>
+            </ol>
+          </div>
+        </li>
+
+        <li>
+          <button class="eco-btn" onclick="toggleEcoSteps('energia', event)">🔌 <strong>Ahorra energía</strong>: Apaga luces y dispositivos</button>
+          <div id="energia" class="eco-steps">
+            <p>💡 Pasos para ahorrar energía:</p>
+            <ol>
+              <li>Apaga las luces al salir del salón.</li>
+              <li>Desconecta cargadores que no uses.</li>
+              <li>Reduce el brillo de pantallas para ahorrar batería.</li>
+            </ol>
+          </div>
+        </li>
+
+        <li>
+          <button class="eco-btn" onclick="toggleEcoSteps('recicla', event)">🚮 <strong>Recicla</strong>: Separa papel, plástico y orgánicos</button>
+          <div id="recicla" class="eco-steps">
+            <p>🗑️ Pasos para reciclar en el colegio:</p>
+            <ol>
+              <li>Papel en la caneca azul.</li>
+              <li>Plásticos y latas en la caneca blanca.</li>
+              <li>Restos de comida en la caneca verde.</li>
+            </ol>
+          </div>
+        </li>
+      </ul>
+
+      <img src="eco.jpg" 
+           alt="Naturaleza" 
+           style="width:100%; max-height:250px; object-fit:cover; border-radius:12px; margin-top:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1)">
+
+      <h4 style="margin-top:15px;">🌍 Reto de la Semana</h4>
+      <p>Este viernes trae una botella plástica para reciclar. ¡Ayuda a reducir la contaminación!</p>
+    </li>
+  </ul>
+</div>
+<div class="card" onclick="toggleMenu('buzon')">
+  <h3>📢 Buzón de Sugerencias</h3>
+  <ul id="buzon" class="submenu">
+    <li>
+      <p>Escribe tus ideas, quejas o sugerencias para mejorar nuestro portal escolar.</p>
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLSeAYsy-Tapx1dvRxQezLSpSeC7EUyxp35whp3opDQxn3yDDog/viewform?embedded=true" 
+        width="100%" 
+        height="600" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0">
+        Cargando…
+      </iframe>
+    </li>
+  </ul>
+</div>
       
 <div class="card" onclick="toggleMenu('calendario')">
   <h3>📆 Calendario Escolar</h3>
@@ -645,8 +683,8 @@
       <iframe 
         src="https://calendar.google.com/calendar/embed?src=es-us.co%23holiday%40group.v.calendar.google.com&ctz=America%2FBogota" 
         style="border:0; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);" 
-        width="100%" 
-        height="600" 
+        width="95%" 
+        height="450" 
         frameborder="0" 
         scrolling="no">
       </iframe>
@@ -659,6 +697,8 @@
       <p>&copy; 2025 Portal Escolar Institucional - Educando para el futuro 🚀</p>
     </footer>
   </div>
+
+  
 
   <script>
     function toggleMenu(id) {
@@ -713,6 +753,7 @@
   </script>
 </body>
 </html>
+
 
 
 
